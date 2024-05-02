@@ -1,0 +1,77 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+
+
+
+
+
+<div class="col-lg-7 col-sm-12 col-md-8 mx-auto row mt-5">
+	<div class="col-12">
+    <div class="row mb-2">
+    <h4 class="text-left col-3">Members </h4>
+    <div class="col-9">
+    <form class="float-right form-inline" action="{% url 'add_users' group_id %}">
+        <input class="form-control" name="search_string" placeholder="Search by Display Name" type="text">
+        <input class="btn btn-primary" type="submit">
+     </form>
+    </div>
+	</div>
+    </div>
+    <table class="table table-primary table-striped table-bordered">
+        <thead class="thead-dark">
+            <th>Display Name</th>
+            <th>Email</th>
+            <th>Add to Group</th>
+        </thead>
+        <tbody>
+            {% for user in page_obj %}
+                <tr>
+                    <td>{{ user.displayName}}</td>
+                    <td>{{ user.userPrincipalName}}</td>
+                    <td class="text-center">
+                        <a href="{% url 'add_user' group_id user.id %}"><i class='fa fa-user-plus' style='font-size:20px'></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    {% if page_obj.has_other_pages %}
+    <nav aria-label="Page navigation example">
+       <ul class="pagination justify-content-center">
+     <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+         <a class="page-link" href="?page=1" tabindex="-1">FIRST</a>
+     </li>
+     <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+         <a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %} " tabindex="-1">Previous</a>
+     </li>
+     {% if page_obj.number|add:'-4' > 1 %}
+         <li class="page-item disabled"><a class="page-link" href="?page={{ page_obj.number|add:'-5' }}">&hellip;</a></li>
+     {% endif %}
+     {% for i in page_obj.paginator.page_range %}
+         {% if page_obj.number == i %}
+             <li class="active page-item disabled"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+         {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+             <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+         {% endif %}
+     {% endfor %}
+     {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+         <li class="page-item disabled"><a class="page-link" href="?page={{ page_obj.number|add:'5' }}">&hellip;</a></li>
+     {% endif %}
+     <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+         <a class="page-link" href="{% if page_obj.has_next %} ?page={{ page_obj.next_page_number }} {% endif %}">Next</a>
+     </li>
+     <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+         <a class="page-link" href="{% if page_obj.has_next %} ?page={{ page_obj.paginator.num_pages }}  {% endif %}">LAST</a>
+     </li>
+ </ul>
+    </nav>
+     <br>
+   {% endif %}
+
+    {% endblock %}
+
+

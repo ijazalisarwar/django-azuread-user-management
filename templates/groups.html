@@ -1,0 +1,37 @@
+{% extends '_base.html' %}
+
+
+
+{% block content %}
+{% if groups_list %}
+<div class="col-lg-7 col-sm-12 col-md-8 mx-auto mt-5">
+
+<h4>Groups </h4>
+<table class="table table-primary table-striped text-center table-bordered">
+    <thead class="thead-dark">
+        <th>Group Name</th>
+        <th>Add Members</th>
+        <th>Remove Members</th>
+        <th>Users List</th>
+    </thead>
+    <tbody>
+        {% for group in groups_list %}
+            <tr>
+                <td>{{ group.displayName }}</td>
+                <td>
+                    <a href="{% url 'add_users' group.id %}"><i class='fa fa-user-plus' style='font-size:20px'></i></a>
+                </td>
+                <td>
+                    <a href="{% url 'remove_users' group.id %}"><i class='fa fa-user-minus' style='font-size:20px'></i></a>
+                </td>
+                <td>
+                    <a href="{% url 'users_list' group.id %}"><i class='fa fa-users' style='font-size:20px'></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endif %}
+{% endblock %}
+

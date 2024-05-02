@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+
+
+<div class="col-lg-7 col-sm-12 col-md-8 mx-auto row mt-5">
+    <h4>Members </h4>
+    <table class="table table-primary table-striped text-center table-bordered">
+        <thead class="thead-dark">
+            <th>Name</th>
+            <th>Email</th>
+        </thead>
+        <tbody>
+            {% for user in users_list %}
+                <tr>
+                    <td>{{ user.displayName}}</td>
+                    <td>{{ user.userPrincipalName}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

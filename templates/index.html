@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+
+
+
+{% block content %}
+
+<dev class="col-lg-5 col-sm-12 col-md-7 mx-auto row mt-5">
+<button class="btn btn-lg btn-primary btn-block" onclick="OpenNewWindow()">Login Azure AD</button>
+</dev>
+{% endblock %}
+
+{% block script %}
+	function OpenNewWindow()
+         {
+			var MyPath = "https://login.microsoftonline.com/3a0ad07f-37d7-4bb3-9e74-d041511052ed/oauth2/v2.0/authorize?\
+            client_id=df812cc1-0724-45cf-9372-0d8ee5cc3efe\
+            &response_type=code\
+            &response_mode=query\
+            &redirect_uri=https://elysian-groupeditor.azurewebsites.net/redirect_uri/\
+            &scope=user.read"
+			window.open(MyPath, "", "toolbar=no,status=no,menubar=no,location=center,scrollbars=no,resizable=no,height=500,width=657");
+		 };
+
+{% endblock %}

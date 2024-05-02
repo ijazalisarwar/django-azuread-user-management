@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+<div class="col-lg-4 col-sm-12 col-md-8 mx-auto mt-5">
+<h4>{{group_data.displayName}}</h4>
+
+<table class="table table-primary table-striped text-center table-bordered">
+  <thead class="thead-dark">
+      <th>Attribute</th>
+      <th>Value</th>
+  </thead>
+  <tbody>
+      {% for key, value in group_data.items %}
+          <tr>
+              <td>{{ key }}</td>
+              <td>{{ value }}</td>
+          </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+</div>
+{% endblock %}
