@@ -1,5 +1,7 @@
 Elysian Group Editor
+
 These Azure Services we use:
+
 •	Azure Web App
 •	Azure AD
 •	Azure Application for SSO
